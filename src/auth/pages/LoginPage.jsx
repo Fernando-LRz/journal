@@ -23,7 +23,7 @@ export const LoginPage = () => {
                         <TextField 
                             label="Contraseña" 
                             type="password" 
-                            placeholder="Ingresa una contraseña"
+                            placeholder="Ingresa tu contraseña"
                             fullWidth
                         />
                     </Grid>

@@ -38,10 +38,11 @@ export const NoteView = () => {
                     type="text"
                     variant="filled"
                     fullWidth
+                    multiline
                     label="Descripción"
-                    placeholder="¿Qúe sucedio el día de hoy?"
+                    placeholder="¿Qúe sucedió el día de hoy?"
                     sx={{ border: 'none', mb: 1 }}
-                    minRows={ 5 }
+                    minRows={ 3 }
                 />
             </Grid>
 

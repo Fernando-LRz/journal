@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Grid, Typography, TextField, Button, Link, Alert } from '@mui/material';
 
 import { useForm } from '../../hooks';
-import { startCreatingUserWithEmail } from '../../store/auth';
+import { startCreatingUserWithEmailPassword } from '../../store/auth';
 
 import { AuthLayout } from '../layout/AuthLayout';
 
@@ -15,7 +15,7 @@ const formData = {
 };
 
 const formValidations = {
-    email: [ (value) => value.includes('@') , 'El corre electrónico es inválido'],
+    email: [ (value) => value.includes('@') , 'El correo electrónico es inválido'],
     password: [ (value) => value.length >= 6 , 'La contraseña debe tener más de 5 caracteres'],
     displayName: [ (value) => value.length >= 1 , 'El nombre es obligatorio'],
 };
@@ -38,7 +38,7 @@ export const RegisterPage = () => {
         setFormSubmitted(true);
 
         if(!isFormValid) return;
-        dispatch( startCreatingUserWithEmail( formState ) );
+        dispatch( startCreatingUserWithEmailPassword( formState ) );
     };
 
     return (

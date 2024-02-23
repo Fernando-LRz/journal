@@ -1,29 +1,43 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import { Grid, Typography, TextField, Button, Link } from '@mui/material';
+import { Grid, Typography, TextField, Button, Link, Alert } from '@mui/material';
 import { Google } from '@mui/icons-material';
 
-import { checkingAuthentication, startGoogleSignIn } from '../../store/auth';
+import { startGoogleSignIn, startLoginWithEmail } from '../../store/auth';
 import { useForm } from '../../hooks';
 
 import { AuthLayout } from '../layout/AuthLayout';
 
+const formData = {
+    email: '',
+    password: '',
+};
+
+const formValidations = {
+    email: [ (value) => value.includes('@') , 'El correo electrónico es inválido'],
+    password: [ (value) => value.length > 0 , 'La contraseña es obligatoria'],
+};
+
 export const LoginPage = () => {
 
     const dispatch = useDispatch();
-    const { status } = useSelector( state => state.auth );
+    const [ formSubmitted , setFormSubmitted ] = useState(false);
 
-    const { email, password, onInputChange } = useForm({
-        email: 'fer@test.com',
-        password: '123abc'
-    });
+    const { status, errorMessage } = useSelector( state => state.auth );
+    const isCheckingAuthentication = useMemo( () => status === 'checking', [ status ]);
 
-    const isAuthenticating = useMemo( () => status === 'checking', [ status ] );
+    const { 
+        formState, email, password, onInputChange, 
+        isFormValid, emailValid, passwordValid
+    } = useForm( formData, formValidations );
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch( checkingAuthentication() );
+        setFormSubmitted(true);
+
+        if(!isFormValid) return;
+        dispatch( startLoginWithEmail( formState ) );
     };
 
     const onGoogleSignIn = () => {
@@ -44,6 +58,8 @@ export const LoginPage = () => {
                             fullWidth
                             value={ email }
                             onChange={ onInputChange }
+                            error={ !!emailValid && formSubmitted }
+                            helperText={ emailValid }
                         />
                     </Grid>
 
@@ -56,7 +72,19 @@ export const LoginPage = () => {
                             fullWidth
                             value={ password }
                             onChange={ onInputChange }
+                            error={ !!passwordValid && formSubmitted }
+                            helperText={ passwordValid }
                         />
+                    </Grid>
+
+                    <Grid 
+                        container
+                        display={ !!errorMessage ? '' : 'none' }
+                        sx={{ mt: 2 }}
+                    >
+                        <Grid item xs={ 12 }>
+                            <Alert severity="error">{ errorMessage }</Alert>
+                        </Grid>
                     </Grid>
                     
                     <Grid container spacing={ 2 } sx={{ mb: 2, mt: 1 }}>
@@ -65,7 +93,7 @@ export const LoginPage = () => {
                                 type="submit" 
                                 variant="contained" 
                                 fullWidth
-                                disabled={ isAuthenticating }
+                                disabled={ isCheckingAuthentication }
                             >
                                 Iniciar sesión
                             </Button>
@@ -75,7 +103,7 @@ export const LoginPage = () => {
                                 variant="contained" 
                                 fullWidth
                                 onClick={ onGoogleSignIn }
-                                disabled={ isAuthenticating }
+                                disabled={ isCheckingAuthentication }
                             >
                                 <Google />
                                 <Typography sx={{ ml: 1 }}>Google</Typography>

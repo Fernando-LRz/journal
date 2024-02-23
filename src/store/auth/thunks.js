@@ -1,4 +1,4 @@
-import { signInWithEmail, signInWithGoogle } from '../../firebase/providers';
+import { signInWithEmailPassword, signInWithGoogle, loginWithEmailPassword } from '../../firebase/providers';
 import { checkingCredendials, login, logout } from './';
 
 export const checkingAuthentication = ( email, password ) => {
@@ -11,22 +11,34 @@ export const startGoogleSignIn = () => {
     return async( dispatch ) => {
         dispatch( checkingCredendials() );
 
-        const resp = await signInWithGoogle();
-        const { ok, errorMessage } = resp;
+        const result = await signInWithGoogle();
+        const { ok, errorMessage } = result;
 
         if( !ok ) return dispatch( logout( errorMessage ) );
-        dispatch( login( resp ) );
+        dispatch( login( result ) );
     };
 };
 
-export const startCreatingUserWithEmail = ({ displayName, email, password }) => {
+export const startCreatingUserWithEmailPassword = ({ displayName, email, password }) => {
     return async( dispatch ) => {
         dispatch( checkingCredendials() );
 
-        const resp = await signInWithEmail({ displayName, email, password });
-        const { ok, errorMessage } = resp;
+        const result = await signInWithEmailPassword({ displayName, email, password });
+        const { ok, errorMessage } = result;
 
         if( !ok ) return dispatch( logout({ errorMessage }) );
-        dispatch( login( resp ) );
+        dispatch( login( result ) );
+    };
+};
+
+export const startLoginWithEmail = ({ email, password }) => {
+    return async( dispatch ) => {
+        dispatch( checkingCredendials() );
+
+        const result = await loginWithEmailPassword({ email, password });
+        const { ok, errorMessage } = result;
+
+        if( !ok ) return dispatch( logout({ errorMessage }) );
+        dispatch( login( result ) );
     };
 };

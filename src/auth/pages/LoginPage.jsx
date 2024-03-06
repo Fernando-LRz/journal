@@ -15,8 +15,8 @@ const formData = {
 };
 
 const formValidations = {
-    email: [ (value) => value.includes('@') , 'El correo electrónico es inválido'],
-    password: [ (value) => value.length > 0 , 'La contraseña es obligatoria'],
+    email: [ (value) => value.includes('@') , 'El correo electrónico es inválido' ],
+    password: [ (value) => value.length > 0 , 'La contraseña es obligatoria' ],
 };
 
 export const LoginPage = () => {
@@ -25,11 +25,10 @@ export const LoginPage = () => {
     const [ formSubmitted , setFormSubmitted ] = useState(false);
 
     const { status, errorMessage } = useSelector( state => state.auth );
-    const isCheckingAuthentication = useMemo( () => status === 'checking', [ status ]);
+    const isCheckingAuthentication = useMemo(() => status === 'checking', [ status ]);
 
     const { 
-        formState, email, password, onInputChange, 
-        isFormValid, emailValid, passwordValid
+        formState, email, password, onInputChange, isFormValid, emailValid, passwordValid
     } = useForm( formData, formValidations );
 
     const onSubmit = (e) => {
@@ -52,7 +51,7 @@ export const LoginPage = () => {
             >
                 <Grid container>
 
-                    <Grid item xs={ 12 } md={ 6 } sx={{ mt: 2 }}>
+                    <Grid item xs={ 12 } sx={{ mt: 2 }}>
                         <TextField 
                             label="Correo electrónico" 
                             type="email" 
@@ -66,7 +65,7 @@ export const LoginPage = () => {
                         />
                     </Grid>
 
-                    <Grid item xs={ 12 } md={ 6 } sx={{ mt: 2 }}>
+                    <Grid item xs={ 12 } sx={{ mt: 2 }}>
                         <TextField 
                             label="Contraseña" 
                             type="password" 

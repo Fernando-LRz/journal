@@ -7,11 +7,11 @@ import {
 
 import { checkingCredendials, login, logout } from './';
 
-export const checkingAuthentication = ( email, password ) => {
+export const checkingAuthentication = () => {
     return async( dispatch ) => {
         dispatch( checkingCredendials() );
-    };
-};
+    }
+}
 
 export const startGoogleSignIn = () => {
     return async( dispatch ) => {
@@ -22,8 +22,8 @@ export const startGoogleSignIn = () => {
 
         if( !ok ) return dispatch( logout( errorMessage ) );
         dispatch( login( result ) );
-    };
-};
+    }
+}
 
 export const startCreatingUserWithEmailPassword = ({ displayName, email, password }) => {
     return async( dispatch ) => {
@@ -34,8 +34,8 @@ export const startCreatingUserWithEmailPassword = ({ displayName, email, passwor
 
         if( !ok ) return dispatch( logout({ errorMessage }) );
         dispatch( login( result ) );
-    };
-};
+    }
+}
 
 export const startLoginWithEmail = ({ email, password }) => {
     return async( dispatch ) => {
@@ -46,12 +46,12 @@ export const startLoginWithEmail = ({ email, password }) => {
 
         if( !ok ) return dispatch( logout({ errorMessage }) );
         dispatch( login( result ) );
-    };
-};
+    }
+}
 
 export const startLogout = () => {
     return async( dispatch ) => {
         await logoutFirebase();
         dispatch( logout() );
-    };
-};
+    }
+}

@@ -76,5 +76,5 @@ export const startDeletingNote = () => {
         await deleteDoc( docRef );
 
         dispatch( deleteNoteById( note.id ) );
-    };
+    }
 }

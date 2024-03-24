@@ -11,7 +11,7 @@ export const fileUpload = async( file ) => {
     formData.append('file', file);
 
     try {
-        const resp = await fetch( cloudUrl, {
+        const resp = await fetch(cloudUrl, {
             method: 'POST',
             body: formData
         });

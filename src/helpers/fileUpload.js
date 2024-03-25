@@ -1,13 +1,17 @@
+import { getEnvironments } from './getEnvironments';
+
+const {
+    VITE_PRODUCT_ENVIRONMENT_CLOUD,
+    VITE_UPLOAD_PRESET,
+} = getEnvironments();
+
 export const fileUpload = async( file ) => {
-    if(!file) throw new Error('No está el archivo a subir');
+    if(!file) return null;
 
-    const uploadPreset = import.meta.env.VITE_UPLOAD_PRESET;
-    const productEnvironmentCloud = import.meta.env.VITE_PRODUCT_ENVIRONMENT_CLOUD;
-
-    const cloudUrl = `https://api.cloudinary.com/v1_1/${ productEnvironmentCloud }/upload`;
+    const cloudUrl = `https://api.cloudinary.com/v1_1/${ VITE_PRODUCT_ENVIRONMENT_CLOUD }/upload`;
     
     const formData = new FormData();
-    formData.append('upload_preset', uploadPreset);
+    formData.append('upload_preset', VITE_UPLOAD_PRESET);
     formData.append('file', file);
 
     try {
@@ -16,12 +20,13 @@ export const fileUpload = async( file ) => {
             body: formData
         });
 
-        if( !resp.ok ) throw new Error('No se pudo subir la imágen');
+        if( !resp.ok ) throw new Error('Error al subir la imágen');
         const data = await resp.json();
 
         return data.secure_url;
         
     } catch (error) {
-        throw new Error( error.message );
+        // throw new Error( error.message );
+        return null;
     }
 }

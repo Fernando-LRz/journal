@@ -30,7 +30,7 @@ export const signInWithGoogle = async() => {
     }
 };
 
-export const signInWithEmailPassword = async({ displayName, email, password }) => {
+export const signUpWithEmailPassword = async({ displayName, email, password }) => {
     try {
         const resp = await createUserWithEmailAndPassword( FirebaseAuth, email, password );
         const { uid, photoURL } = resp.user;

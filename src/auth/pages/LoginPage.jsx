@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Grid, Typography, TextField, Button, Link, Alert } from '@mui/material';
 import { Google } from '@mui/icons-material';
 
-import { startGoogleSignIn, startLoginWithEmail } from '../../store/auth';
+import { startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth';
 import { useForm } from '../../hooks';
 
 import { AuthLayout } from '../layout/AuthLayout';
@@ -36,7 +36,7 @@ export const LoginPage = () => {
         setFormSubmitted(true);
 
         if(!isFormValid) return;
-        dispatch( startLoginWithEmail( formState ) );
+        dispatch( startLoginWithEmailPassword( formState ) );
     };
 
     const onGoogleSignIn = () => {
@@ -45,9 +45,10 @@ export const LoginPage = () => {
 
     return (
         <AuthLayout title="Inicio de sesión">
-            <form 
+            <form
                 onSubmit={ onSubmit }
                 className="animate__animated animate__fadeIn animate__faster"
+                aria-label="login-form"
             >
                 <Grid container>
 
@@ -76,6 +77,9 @@ export const LoginPage = () => {
                             onChange={ onInputChange }
                             error={ !!passwordValid && formSubmitted }
                             helperText={ passwordValid }
+                            inputProps={{
+                                'data-testid': 'password'
+                            }}
                         />
                     </Grid>
 
@@ -106,6 +110,7 @@ export const LoginPage = () => {
                                 fullWidth
                                 onClick={ onGoogleSignIn }
                                 disabled={ isCheckingAuthentication }
+                                aria-label="google-btn"
                             >
                                 <Google />
                                 <Typography sx={{ ml: 1 }}>Google</Typography>

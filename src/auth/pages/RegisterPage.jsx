@@ -15,9 +15,9 @@ const formData = {
 };
 
 const formValidations = {
-    email: [ (value) => value.includes('@') , 'El correo electrónico es inválido'],
-    password: [ (value) => value.length >= 6 , 'La contraseña debe tener más de 5 caracteres'],
-    displayName: [ (value) => value.length >= 1 , 'El nombre es obligatorio'],
+    email: [(value) => value.includes('@') , 'El correo electrónico es inválido'],
+    password: [(value) => value.length >= 6 , 'La contraseña debe tener mínimo 6 caracteres'],
+    displayName: [(value) => value.length >= 1 , 'El nombre es obligatorio'],
 };
 
 export const RegisterPage = () => {

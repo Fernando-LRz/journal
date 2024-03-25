@@ -1,8 +1,35 @@
-# React + Vite
+# Journal
+Journal web app built with React.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
+* Login with email and password.
+* Login with Google.
+* Note registration with:
+    - Title
+    - Description
+    - Images
+* Editing and deletion of notes.
 
-Currently, two official plugins are available:
+## Installation
+1. Clone the repository
+```bash
+git clone https://github.com/Fernando-LRz/journal.git
+``` 
+2. Navigate to the project directory
+```bash
+cd journal
+```
+3. Install dependencies
+```bash
+npm install
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Configuration
+* A Firebase account and a Cloudinary account are required. Environment variables for both accounts must be added to a .env file. There is a sample .env file in the project.
+
+## Run
+```bash
+npm run dev
+```
+
+## Images

@@ -5,9 +5,9 @@ Journal web app built with React.
 * Login with email and password.
 * Login with Google.
 * Note registration with:
-    - Title
-    - Description
-    - Images
+    - Title.
+    - Description.
+    - Images.
 * Editing and deletion of notes.
 
 ## Installation

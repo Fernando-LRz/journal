@@ -2,13 +2,13 @@
 Journal web app built with React.
 
 ## Features
-* Login with email and password.
-* Login with Google.
+* Login with email and password
+* Login with Google
 * Note registration with:
-    - Title.
-    - Description.
-    - Images.
-* Editing and deletion of notes.
+    - Title
+    - Description
+    - Images
+* Editing and deletion of notes
 
 ## Installation
 1. Clone the repository
@@ -25,7 +25,7 @@ npm install
 ```
 
 ## Configuration
-* A Firebase account and a Cloudinary account are required. Environment variables for both accounts must be added to a .env file. There is a sample .env file in the project.
+A Firebase account and a Cloudinary account are required. Environment variables for both accounts must be added to a .env file. There is a sample .env file in the project.
 
 ## Run
 ```bash
